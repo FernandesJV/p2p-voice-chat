@@ -1,7 +1,6 @@
 //React imports
 import React, {useEffect, useState} from 'react'
-import ReactDOM from "react-dom/client";
-import { BrowserRouter, Routes, Route, useParams, useNavigate, Link, Router } from "react-router-dom";
+import { BrowserRouter, Route, useParams, Link, Router } from "react-router-dom";
 
 //Importing pages
 import './App.css'
