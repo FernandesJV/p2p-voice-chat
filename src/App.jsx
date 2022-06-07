@@ -7,12 +7,13 @@ import './App.css'
 import MyRoutes from "./pages/myroutes";
 import infoContext from "./pages/myInfo";
 
+//Creating Websocket connection
+const socket = new WebSocket("ws://localhost:8009")
 const myInfo = {
     "userName":'',
-    "myPeer":null
+    "myPeer":null,
+    "webSocket":socket,
 }
-
-const socket = new WebSocket("ws://localhost:8009")
 
 socket.addEventListener("open",()=>{
     console.log('Connected')
