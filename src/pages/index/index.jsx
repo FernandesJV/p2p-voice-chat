@@ -17,7 +17,6 @@ function Index(){
 
     const routeChange = (e) =>{
         let path = e;
-        myInfo.userName = usernameRef.current.value;
         navigate(path);
     }
 
@@ -41,7 +40,8 @@ function Index(){
             </div>
             <div>
                 <button onClick={() => {
-                    createRoom(roomId,setRoomId,myInfo.webSocket,myInfo.myPeer)
+                    myInfo.userName = usernameRef.current.value;
+                    createRoom(roomId,setRoomId,myInfo.webSocket,myInfo.myPeer,usernameRef.current.value)
                 }}>Create Room</button>
 
                 <button onClick={() => {
@@ -52,10 +52,10 @@ function Index(){
     )
 }
 
-function createRoom(roomId,setRoomId,socket){
+function createRoom(roomId,setRoomId,socket,peer,username){
     let newRoomId = v4()
     setRoomId(newRoomId)
-    socket.send(JSON.stringify({event:'newRoom',data:{roomId:newRoomId,user:{peer:myInfo.myPeer}}}))
+    socket.send(JSON.stringify({event:'newRoom',data:{roomId:newRoomId,user:{id:peer.id,peer:peer,username:username}}}))
 }
 
 export default Index
