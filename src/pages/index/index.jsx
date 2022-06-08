@@ -36,7 +36,7 @@ function Index(){
             </div>
             <div>
                 <button onClick={() => {
-                    setRoomId(v4())
+                    createRoom(roomId,setRoomId,myInfo.webSocket,myInfo.myPeer)
                 }}>Create Room</button>
 
                 <button onClick={() => {
@@ -45,6 +45,12 @@ function Index(){
             </div>
         </div>
     )
+}
+
+function createRoom(roomId,setRoomId,socket){
+    let newRoomId = v4()
+    setRoomId(newRoomId)
+    socket.send(JSON.stringify({event:'newRoom',data:{roomId:newRoomId,user:{peer:myInfo.myPeer}}}))
 }
 
 export default Index

@@ -25,9 +25,9 @@ function Room(){
         <div>
             <a>{roomId}</a>
             <div>
-                {users.map((user)=>{
+                {users.map((user,index)=>{
                     return(
-                        <UserCard username={user.username}/>
+                        <UserCard key={myPeer.id} username={user.username}/>
                 )
                 })}
             </div>

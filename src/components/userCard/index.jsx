@@ -1,4 +1,3 @@
-
 function UserCard({username, video, audio}){
     return(
         <div className={'userCell'}>
