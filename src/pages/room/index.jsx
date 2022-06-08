@@ -10,13 +10,13 @@ function Room(){
     let myInfo = useContext(infoContext); //Fetching context for information
 
 
-    //Room users array with self as first user
-
-    const usersDiv = createRef() //Creating reference for div containing users
-    const [users, setUsers] = useState([{username:myInfo.userName,"peer":myPeer}])
-
     const socket = myInfo.webSocket //Getting access to the socket in this scope
     const myPeer = myInfo.myPeer //Getting access to the peer in this scope
+
+    //Room users array with self as first user
+    const [users, setUsers] = useState([{username:myInfo.userName,"peer":myPeer}])
+
+
 
     //Render users new client connects
 
@@ -27,7 +27,7 @@ function Room(){
             <div>
                 {users.map((user,index)=>{
                     return(
-                        <UserCard key={myPeer.id} username={user.username}/>
+                        <UserCard key={myInfo.myPeer.id} username={user.username}/>
                 )
                 })}
             </div>
