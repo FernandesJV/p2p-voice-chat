@@ -1,29 +1,39 @@
 import {useParams} from "react-router-dom";
-import React, {useContext, useEffect} from "react";
+import React, {createRef, useContext, useEffect, useState} from "react";
 import { Peer } from 'peerjs';
 import infoContext from "../myInfo";
+import UserCard from "../../components/userCard";
 
 function Room(){
-    //Fetching roomID
-    let { roomId } = useParams();
-    //Room users array
-    let users = []
-    //Creating peer for communication
-    let myPeer = new Peer()
-    //Fetching context for information
-    const myInfo = useContext(infoContext);
-    //Updating peer information on context
-    myInfo.myPeer = myPeer
-    //Adding self ass user to users array
-    users.push({username:myInfo.userName,"peer":myPeer})
-    //Getting access to the socket in this scope
-    const socket = myInfo.webSocket
-    console.log(socket)
+
+    let { roomId } = useParams(); //Fetching roomID
+    let myPeer = new Peer() //Creating peer for communication
+    const myInfo = useContext(infoContext); //Fetching context for information
+    const usersDiv = createRef() //Creating reference for div containing users
+
+    myInfo.myPeer = myPeer //Updating peer information on context
+
+    //Room users array with self as first user
+    const [users, setUsers] = useState([{username:myInfo.userName,"peer":myPeer}])
+
+    const socket = myInfo.webSocket //Getting access to the socket in this scope
+
+    //Render users new client connects
+
+
     return(
         <div>
             <a>{roomId}</a>
+            <div>
+                {users.map((user)=>{
+                    return(
+                        <UserCard username={user.username}/>
+                )
+                })}
+            </div>
         </div>
     )
 }
+
 
 export default Room
